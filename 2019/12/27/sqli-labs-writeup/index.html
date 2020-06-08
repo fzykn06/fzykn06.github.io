@@ -436,7 +436,8 @@
 
 <p>将/tmp/to.txt导入到t0表中，character set gbk是字符集设置为gbk，fileds terminated by 是每一项数据之间的分隔符，lines terminated by 是行的结尾符</p>
 <p>当错误代码为2时，文件不存在，错误代码为13时没有权限，可以考虑/tmp文件</p>
-<h4 id="导入到文件"><a href="#导入到文件" class="headerlink" title="导入到文件"></a>导入到文件</h4><p>select ……into outfile ‘file_name’</p>
+<h4 id="导入到文件"><a href="#导入到文件" class="headerlink" title="导入到文件"></a>导入到文件</h4><figure class="highlight lasso"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="params">...</span><span class="params">...</span><span class="keyword">into</span> outfile <span class="string">'file_name'</span></span><br></pre></td></tr></table></figure>
+
 <p>可将被选择的某一行写入到一个文件中，该文件被创建到服务器主机上，前提是拥有file权限，才能使用该语法，file_name不能是一个已经存在的文件。</p>
 <p>一般有两种利用形式：</p>
 <ul>
@@ -522,8 +523,9 @@
 <p>由上面这张图可以看到通过post传输的参数共有三个</p>
 <figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">uname=<span class="number">1</span>&amp;passwd=<span class="number">1</span>&amp;submit=Submit</span><br></pre></td></tr></table></figure>
 
-<p>其中键入的数据的变量为uname和passwd，通过像get参数传输的注入方式进行post注入，例如：uname:admin’ </p>
-<pre><code>passwd:  111(随便输入)</code></pre><p>数据库进行了报错回显，通过报错信息我们发现sql查询语句进行了单引号处理</p>
+<p>其中键入的数据的变量为uname和passwd，通过像get参数传输的注入方式进行post注入，例如：</p>
+<pre><code>uname:admin&apos; 
+passwd:  111(随便输入)</code></pre><p>数据库进行了报错回显，通过报错信息我们发现sql查询语句进行了单引号处理</p>
 <p>传入参数：uname:admin’# 密码随意</p>
 <p><img src="/2019/12/27/sqli-labs-writeup/33.png" alt></p>
 <p>发现直接将用户名密码查询出来了，username：admin  password：admin。当提交username和password后，后台形成的sql语句为</p>
